@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # [db] 2016/08/11
+# Use with cronjob */5 * * * * ~/.../update.py
 import os
 import requests
 import ConfigParser
