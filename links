@@ -14,6 +14,8 @@ RewriteRule ^illiad$ https://uml.illiad.oclc.org/illiad/uln/logon.html [r=302,L]
 RewriteRule ^weather$ http://danbrooks.net/weatherbox [r=302,L]
 RewriteRule ^weatherbox$ http://danbrooks.net/weatherbox [r=302,L]
 
+RewriteRule ^wiki.traffic$ https://en.wikipedia.org/wiki/Traffic_sign_design [r=302,L]
+
 # Requires Passwords
 # ==================
 # AuthType Basic
