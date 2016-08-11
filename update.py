@@ -47,7 +47,7 @@ buffer.append("Options +FollowSymLinks")
 buffer.append("RewriteEngine on")
 buffer.append("RewriteRule ^.htaccess$ - [r=404,L] # Hide links file")
 buffer.append("RewriteRule ^.git$ - [r=404,L] # Hide links file")
-buffer.append("RewriteRule ^links.ini$ - [r=404,L] # Hide links file")
+#buffer.append("RewriteRule ^links.ini$ - [r=404,L] # Hide links file")
 
 # Copy the links into the output file buffer
 linkrefs = parser.options("LINKS")
