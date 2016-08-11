@@ -5,6 +5,7 @@
 Options +FollowSymLinks
 RewriteEngine on
 #RewriteRule ^(.*)$ http://www.weaselpipe.com/ [r=302,L]
+RewriteRule ^edit$ https://github.com/mrdanbrooks/links/edit/master/links [r=302,L]
 RewriteRule ^links$ - [r=404,L] # hides the links file
 RewriteRule ^blog$ http://www.weaselpipe.com/ [r=302,L]
 RewriteRule ^home$ https://goo.gl/maps/uPgJ4ZsQB172 [r=302,L]
