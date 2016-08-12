@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # [db] 2016/08/11
 # Use with cronjob */5 * * * * ~/.../update.py
+# cronjob installed on cs1
 import os
 import datetime
 import requests
@@ -9,7 +10,7 @@ import subprocess
 
 # Settings - these are files in the same directory as script
 configfile = "links.ini"
-githubconfigurl = "https://raw.githubusercontent.com/mrdanbrooks/links/master/links.ini"
+githubconfigurl = "https://raw.githubusercontent.com/allohakdan/links/master/links.ini"
 outputfile = ".htaccess"
 
 # Initialize the directory the script is located in
