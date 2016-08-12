@@ -50,9 +50,10 @@ buffer.append("RewriteRule ^.git$ - [r=404,L] # Hide links file")
 #buffer.append("RewriteRule ^links.ini$ - [r=404,L] # Hide links file")
 
 # Copy the links into the output file buffer
+# Why use NE - http://stackoverflow.com/a/11380893 
 linkrefs = parser.options("LINKS")
 for linkref in linkrefs:
-    buffer.append("RewriteRule ^%s$ %s [r=302,L]" % (linkref, parser.get("LINKS", linkref)))
+    buffer.append("RewriteRule ^%s$ %s [r=302,NE,L]" % (linkref, parser.get("LINKS", linkref)))
 
 # Write the buffer to the output file
 with open(os.path.join(path,outputfile), "w") as f:
