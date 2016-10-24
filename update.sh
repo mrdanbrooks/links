@@ -14,7 +14,7 @@ fi
 # if indicator file has a 1 in it, then we should update
 if [[ `cat $DIR/../cgi_bin/update.txt` == 1 ]]; then
    echo "Update Requested"
-   /usr/bin/python $DIR/update.py
+   /usr/bin/python $DIR/update.py --dont-check-update
    if [[ $? == 0 ]]; then
        echo "Dismissing Update"
        echo "0" > $DIR/../cgi_bin/update.txt
