@@ -74,6 +74,7 @@ class IndexGenerator(LinkFileGenerator):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("update.py")
+    parser.add_argument("--dont-check-update", action="store_true")
     parser.add_argument("--dont-update", action="store_true")
     parser.add_argument("--dont-pull", action="store_true")
     parser.add_argument("--path", type=str, default=script_path)
@@ -84,17 +85,18 @@ if __name__ == "__main__":
     print "Using path:", path
 
     if not args.dont_update:
-        # Determine if the github version of the config file is different from ours 
-        remote = requests.get(githubconfigurl).text
-        with open(os.path.join(path,configfile), "r") as f:
-            local = "".join(f.readlines())
-        if remote == local:
-            print "No Change"
-            exit(1)
-        print "Update Found"
+        if not args.dont_check_update:
+            # Determine if the github version of the config file is different from ours 
+            remote = requests.get(githubconfigurl).text
+            with open(os.path.join(path,configfile), "r") as f:
+                local = "".join(f.readlines())
+            if remote == local:
+                print "No Change"
+                exit(1)
+            print "Update Found"
 
 
-        # Download the new changes
+            # Download the new changes
         if not args.dont_pull:
             process = subprocess.Popen(["git","pull","origin","master"], cwd=path, stdout=subprocess.PIPE)
             print process.communicate()[0]
