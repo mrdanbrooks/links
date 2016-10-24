@@ -18,9 +18,21 @@ if [[ `cat $DIR/../cgi_bin/update.txt` == 1 ]]; then
    if [[ $? == 0 ]]; then
        echo "Dismissing Update"
        echo "0" > $DIR/../cgi_bin/update.txt
-   else
-       echo "Will try again later"
    fi
-#else
+else
+   exit 0
 #   echo "No update"
+fi
+
+# If update request has been active for too long, disregard it
+#timesincemod=$((($(date +%s) - $(stat -c %Y cgi_bin/update.txt))/60))
+modtime=$(stat -c %Y cgi_bin/update.txt)
+now=$(date +%s)
+timediff=$((($now-$modtime)/60))
+
+if [[ "$timediff" -gt "10" ]]; then
+   echo "Disregarding Update"
+   echo "0" > $DIR/../cgi_bin/update.txt
+else
+   echo "Will try again later"
 fi
