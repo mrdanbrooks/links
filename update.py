@@ -54,6 +54,8 @@ class HtaccessGenerator(LinkFileGenerator):
         self.add("RewriteEngine on")
         self.add("RewriteRule ^.htaccess$ - [r=404,L] # Hide links file")
         self.add("RewriteRule ^.git$ - [r=404,L] # Hide links file")
+        self.add("RewriteRule ^update.py$ - [r=404,L] # Hide update scripts")
+        self.add("RewriteRule ^update.sh$ - [r=404,L] # Hide update scripts")
         # self.add("RewriteRule ^links.ini$ - [r=404,L] # Hide links file")
     def addLink(self, name, address):
         self.add("RewriteRule ^%s$ %s [r=302,NE,L]" % (name, address))
@@ -88,7 +90,7 @@ if __name__ == "__main__":
             local = "".join(f.readlines())
         if remote == local:
             print "No Change"
-            exit(0)
+            exit(1)
         print "Update Found"
 
 
