@@ -20,13 +20,13 @@ if [[ `cat $DIR/../cgi_bin/update.txt` == 1 ]]; then
        echo "0" > $DIR/../cgi_bin/update.txt
    fi
 else
+#    echo "No update"
    exit 0
-#   echo "No update"
 fi
 
 # If update request has been active for too long, disregard it
 #timesincemod=$((($(date +%s) - $(stat -c %Y cgi_bin/update.txt))/60))
-modtime=$(stat -c %Y cgi_bin/update.txt)
+modtime=$(stat -c %Y $DIR/../cgi_bin/update.txt)
 now=$(date +%s)
 timediff=$((($now-$modtime)/60))
 
