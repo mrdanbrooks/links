@@ -12,6 +12,7 @@ import subprocess
 # Settings - these are files in the same directory as script
 configfile = "links.ini"
 githubconfigurl = "https://raw.githubusercontent.com/allohakdan/links/master/links.ini"
+github_edit = "https://github.com/allohakdan/links/edit/master/links.ini"
 outputfile = ".htaccess"
 indexfile = "links.html"
 
@@ -72,6 +73,31 @@ class IndexGenerator(LinkFileGenerator):
     def tail(self):
         self.add("</body></html>")
 
+def compile_list(config):
+    link_list = list()
+    sections = config.sections()
+    for section in sections:
+        linkrefs = config.options(section)
+        # Add links
+        for linkref in linkrefs:
+            name = os.path.join(section.strip('/'), linkref.strip('/'))
+            address = config.get(section, linkref)
+            link_list.append((name,address))
+    return link_list
+
+def compile_edit_links(config, path):
+    sections = config.sections()
+    link_list = list()
+    with open(path) as conf_file:
+        for num, line in enumerate(conf_file, 1):
+            for section in sections:
+                if "[%s]" % section in line:
+                    name = os.path.join(section.strip(),"edit")
+                    address = github_edit + "#L%d" % num
+                    link_list.append((name, address))
+    return link_list
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("update.py")
     parser.add_argument("--dont-check-update", action="store_true")
@@ -110,8 +136,8 @@ if __name__ == "__main__":
         raise Exception("%s files does not exist" % configfile)
     parser = ConfigParser.ConfigParser()
     parser.read(os.path.join(path,configfile))
-    if not parser.has_section("LINKS"):
-        raise Exception("LINKS section must be defined")
+#     if not parser.has_section("LINKS"):
+#         raise Exception("LINKS section must be defined")
 
 
     # Initialize the output file buffer
@@ -122,12 +148,24 @@ if __name__ == "__main__":
 
     # Copy the links into the output file buffer
     # Why use NE - http://stackoverflow.com/a/11380893 
-    linkrefs = parser.options("LINKS")
-    for linkref in linkrefs:
-        name = linkref
-        address = parser.get("LINKS", linkref)
+#     linkrefs = parser.options("LINKS")
+#     for linkref in linkrefs:
+#         name = linkref
+#         address = parser.get("LINKS", linkref)
+#         htaccess_buffer.addLink(name, address)
+#         index_buffer.addLink(name, address)
+    link_list = compile_list(parser)
+    edit_links = compile_edit_links(parser, os.path.join(path,configfile))
+    for name, address in link_list:
         htaccess_buffer.addLink(name, address)
         index_buffer.addLink(name, address)
+    for name, address in edit_links:
+        print "Adding %s  = %s" % (name, address)
+        htaccess_buffer.addLink(name, address)
+        index_buffer.addLink(name, address)
+
+
+
 
     htaccess_buffer.tail()
     index_buffer.tail()
