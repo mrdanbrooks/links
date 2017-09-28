@@ -136,6 +136,7 @@ if __name__ == "__main__":
         raise Exception("%s files does not exist" % configfile)
     parser = ConfigParser.ConfigParser()
     parser.read(os.path.join(path,configfile))
+    # [db] we removed the LINKS section to rename it '/'
 #     if not parser.has_section("LINKS"):
 #         raise Exception("LINKS section must be defined")
 
@@ -148,12 +149,6 @@ if __name__ == "__main__":
 
     # Copy the links into the output file buffer
     # Why use NE - http://stackoverflow.com/a/11380893 
-#     linkrefs = parser.options("LINKS")
-#     for linkref in linkrefs:
-#         name = linkref
-#         address = parser.get("LINKS", linkref)
-#         htaccess_buffer.addLink(name, address)
-#         index_buffer.addLink(name, address)
     link_list = compile_list(parser)
     edit_links = compile_edit_links(parser, os.path.join(path,configfile))
     for name, address in link_list:
@@ -162,7 +157,8 @@ if __name__ == "__main__":
     for name, address in edit_links:
         print "Adding %s  = %s" % (name, address)
         htaccess_buffer.addLink(name, address)
-        index_buffer.addLink(name, address)
+        # Don't put edit links in the index list
+#         index_buffer.addLink(name, address)
 
 
 
