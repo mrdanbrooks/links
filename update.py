@@ -16,6 +16,75 @@ github_edit = "https://github.com/allohakdan/links/edit/master/links.ini"
 outputfile = ".htaccess"
 indexfile = "links.html"
 
+# Expandable lists
+# https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_accordion_lists
+# https://www.w3schools.com/howto/howto_js_accordion.asp
+# https://www.w3schools.com/jquerymobile/tryit.asp?filename=tryjqmob_lists_collapsible
+# <!DOCTYPE html>
+# <html>
+# <head>
+# <style>
+# button.accordion {
+#     background-color: #eee;
+#     color: #444;
+#     cursor: pointer;
+#     padding: 18px;
+#     width: 100%;
+#     border: none;
+#     text-align: left;
+#     outline: none;
+#     font-size: 15px;
+#     transition: 0.4s;
+# }
+# 
+# button.accordion.active, button.accordion:hover {
+#     background-color: #ccc; 
+# }
+# 
+# div.panel {
+#     padding: 0 18px;
+#     display: none;
+#     background-color: white;
+# }
+# </style>
+# </head>
+# <body>
+# 
+# <h2>Accordion</h2>
+# 
+# <button class="accordion" onclick="myFunction('demo1')">Section 1</button>
+# <div class="panel" id="demo1">
+#   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+# </div>
+# 
+# <button class="accordion" onclick="myFunction('demo2')">Section 2</button>
+# <div class="panel" id="demo2">
+#   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+# </div>
+# 
+# <button class="accordion"  onclick="myFunction('demo3')">Section 3</button>
+# <div class="panel" id="demo3">
+#   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+#   <button class="accordion"  onclick="myFunction('demo4')">Section 4</button>
+#   <div class="panel" id="demo4">
+#   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+# </div>
+# </div>
+# 
+# <script>
+# function myFunction(id) {
+#     var panel = document.getElementById(id);
+#     if (panel.style.display === "block") {
+#          panel.style.display = "none";
+#     } else {
+#         panel.style.display = "block";
+#     }
+# }
+# </script>
+# 
+# </body>
+# </html>
+
 # Initialize the directory the script is located in
 script_path = os.path.dirname(os.path.realpath(__file__))
 
