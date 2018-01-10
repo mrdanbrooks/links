@@ -176,7 +176,7 @@ if __name__ == "__main__":
     parser.add_argument("--path", type=str, default=script_path)
 
     args = parser.parse_args()
-
+    print str(datetime.datetime.now())
     path = args.path
     print "Using path:", path
 
