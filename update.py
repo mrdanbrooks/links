@@ -129,7 +129,7 @@ class HtaccessGenerator(LinkFileGenerator):
         # self.add("RewriteRule ^links.ini$ - [r=404,L] # Hide links file")
     def addLink(self, name, address):
         address = address.replace("%","\%")
-        self.add("RewriteRule ^%s$ %s [r=302,NE,L]" % (name, address))
+        self.add("RewriteRule ^%s$ %s [r=302,NE,L,QSA]" % (name, address))
     def tail(self):
         return
 
